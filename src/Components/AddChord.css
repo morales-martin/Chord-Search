@@ -1,0 +1,8 @@
+.add-chord__container svg {
+    width: 2rem;
+}
+
+.add-chord__container path {
+    fill: white;
+}
+

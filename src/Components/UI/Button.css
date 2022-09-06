@@ -1,0 +1,17 @@
+.btn-svg {
+    background: transparent;
+    border: none;
+    outline: none;
+}
+
+.btn-svg:hover {
+    cursor: pointer;
+}
+
+.btn-svg path {
+    fill: white;
+}
+
+.btn-svg svg {
+    width: 2rem;
+}

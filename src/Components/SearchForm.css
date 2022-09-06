@@ -1,16 +1,9 @@
-.search-chords__container {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-}
 
 .search-form {
   min-width: 40%;
   margin: 0 auto;
   align-items: center;
-  height: 100vh;
   position: relative;
-
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -32,21 +25,6 @@
     cursor: pointer;
 }
 
-.search-form__button {
-    background: transparent;
-    border: none;
-    outline: none;
+.search-form__searchbtn {
     margin-left: -4rem;
-}
-
-.search-form__button:hover {
-    cursor: pointer;
-}
-
-.search-form__button path {
-    fill: white;
-}
-
-.search-form__button svg {
-    width: 2rem;
 }
