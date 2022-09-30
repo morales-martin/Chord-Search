@@ -26,7 +26,7 @@ function SearchChords() {
           setIsSubmitted={setIsSubmitted}
           handleAddSubmit={addSubmitHandler}
         />
-        {addChord && <AddChord setAddChord={setAddChord}  />}
+        {addC2hord && <AddChord setAddChord={setAddChord}  />}
       </div>
       <ResultGrid results={results} isSubmitted={isSubmitted} />
     </div>
