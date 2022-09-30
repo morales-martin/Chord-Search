@@ -1,14 +1,25 @@
-import React from "react";
-import './AddChord.css'
+import React, { useRef } from "react";
+import ReactDom from "react-dom";
+import "./AddChord.css";
 
-const AddChord = props => {
+const AddChord = (props) => {
+  // close the modal when clicking outside the modal.
+  const modalRef = useRef();
+  const closeModal = (e) => {
+    if (e.target === modalRef.current) {
+      props.setAddChord(false);
+    }
+  };
 
-  
-
-  return (
-    <div className='add-chord__container'>
-      
-    </div>
+  //render the modal JSX in the portal div.
+  return ReactDom.createPortal(
+    <div className="container" ref={modalRef} onClick={closeModal}>
+      <div className="modal">
+        <h2>This is a Modal</h2>
+        <button onClick={() => props.setAddChord(false)}>X</button>
+      </div>
+    </div>,
+    document.getElementById("portal")
   );
 };
 
