@@ -14,7 +14,12 @@ function SearchChords() {
 
   const addSubmitHandler = e => {
     e.preventDefault();
-    setAddChord(true);
+  }
+
+  const addChordHandler = (e) => {
+    e.preventDefault()
+    let addSwitch = addChord ? false : true;
+    setAddChord(addSwitch);
   }
 
   return (
@@ -25,8 +30,9 @@ function SearchChords() {
           setLoading={setLoading}
           setIsSubmitted={setIsSubmitted}
           handleAddSubmit={addSubmitHandler}
+          setAddChord={addChordHandler}
         />
-        {addChord && <AddChord setAddChord={setAddChord}  />}
+        {addChord && <AddChord addChordSwitch={addChord} setAddChord={addChordHandler}/>}
       </div>
       <ResultGrid results={results} isSubmitted={isSubmitted} />
     </div>

@@ -1,8 +1,45 @@
-.add-chord__container svg {
-    width: 2rem;
+.add_chord__overlay {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  background-color: rgba(78, 78, 78, 0.78);
 }
 
-.add-chord__container path {
-    fill: white;
+.add_chord__modal {
+  top: 50%;
+  left: 50%;
+  outline: none;
+  padding: 25px;
+  overflow: auto;
+  position: fixed;
+  border-radius: 3px;
+  transform: translate(-50%, -50%);
+  background: grey;
 }
 
+.add-chord-form {
+  min-width: 40%;
+  margin: 0 auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 0.25;
+}
+
+.add-chord-form input {
+    background: white;
+    border-radius: 15px;
+    border: none;
+    outline: none;
+    font-size: xx-large;
+    color: white;
+    margin: 1rem;
+    padding: 0.1rem;
+  }
+
+  .add-chord-form label {
+    margin-left: 1rem;
+  }
+  

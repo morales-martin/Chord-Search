@@ -1,25 +1,46 @@
-import React, { useRef } from "react";
-import ReactDom from "react-dom";
+import React from "react";
+import Modal from "react-modal";
+import { useForm } from "react-hook-form";
+import Button from "./UI/Button";
 import "./AddChord.css";
 
 const AddChord = (props) => {
-  // close the modal when clicking outside the modal.
-  const modalRef = useRef();
-  const closeModal = (e) => {
-    if (e.target === modalRef.current) {
-      props.setAddChord(false);
+  const { register, handleSubmit } = useForm();
+
+  const onSubmit = async (data) => {
+    try {
+      console.log(data);
+    } catch {
+      console.error("Failed to submit new chord");
     }
   };
 
-  //render the modal JSX in the portal div.
-  return ReactDom.createPortal(
-    <div className="container" ref={modalRef} onClick={closeModal}>
-      <div className="modal">
-        <h2>This is a Modal</h2>
-        <button onClick={() => props.setAddChord(false)}>X</button>
-      </div>
-    </div>,
-    document.getElementById("portal")
+  return (
+    <Modal
+      className="add_chord__modal"
+      overlayClassName="add_chord__overlay"
+      onRequestClose={props.setAddChord}
+      contentLabel="Tiny nomadic modal popover"
+      isOpen={props.addChordSwitch}
+    >
+      <form className="add-chord-form" onSubmit={handleSubmit(onSubmit)}>
+        <label htmlFor="chordName">Chord Name</label>
+        <input name="chordName" {...register("chordName")} />
+        <label htmlFor="Chord1">Chord1</label>
+        <input name="Chord1" {...register("Chord1")} />
+        <label htmlFor="Chord2">Chord2</label>
+        <input name="Chord2" {...register("Chord2")} />
+        <label htmlFor="Chord3">Chord3</label>
+        <input name="Chord3" {...register("Chord3")} />
+        <label htmlFor="Chord4">Chord4</label>
+        <input name="Chord4" {...register("Chord4")} />
+        <label htmlFor="Chord5">Chord5</label>
+        <input name="Chord5" {...register("Chord5")} />
+        <Button>
+          Submit
+        </Button>
+      </form>
+    </Modal>
   );
 };
 
