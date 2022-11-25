@@ -7,7 +7,13 @@ router.route("/").get((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
-router.route("/add").get((req, res) => {
+router.route("/search").get((req, res) => {
+  Chord.find({ "chordName": req.query.chordName })
+    .then((chords) => res.json(chords))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
+router.route("/add").post((req, res) => {
   const chordName = req.body.chordName;
   const chordStrings = req.body.chordStrings;
 

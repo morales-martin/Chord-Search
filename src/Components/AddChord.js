@@ -3,13 +3,27 @@ import Modal from "react-modal";
 import { useForm } from "react-hook-form";
 import Button from "./UI/Button";
 import "./AddChord.css";
+import axios from "axios";
 
 const AddChord = (props) => {
   const { register, handleSubmit } = useForm();
+  Modal.setAppElement("body");
 
   const onSubmit = async (data) => {
     try {
-      console.log(data);
+      let newChord = {
+        chordName: data.chordName,
+        chordStrings: `${data.Chord1} ${data.Chord2} ${data.Chord3} ${data.Chord4} ${data.Chord5} ${data.Chord6}`,
+      };
+
+
+      axios
+        .post("http://localhost:5000/chords/add", newChord)
+        .then((res) => console.log(res.data));
+
+      axios.get('http://localhost:5000/chords').then(res => console.log(res.data))
+
+      props.addChordHandler();
     } catch {
       console.error("Failed to submit new chord");
     }
@@ -19,7 +33,7 @@ const AddChord = (props) => {
     <Modal
       className="add_chord__modal"
       overlayClassName="add_chord__overlay"
-      onRequestClose={props.setAddChord}
+      onRequestClose={props.addChordHandler}
       contentLabel="Tiny nomadic modal popover"
       isOpen={props.addChordSwitch}
     >
@@ -36,9 +50,9 @@ const AddChord = (props) => {
         <input name="Chord4" {...register("Chord4")} />
         <label htmlFor="Chord5">Chord5</label>
         <input name="Chord5" {...register("Chord5")} />
-        <Button>
-          Submit
-        </Button>
+        <label htmlFor="Chord6">Chord6</label>
+        <input name="Chord6" {...register("Chord6")} />
+        <Button>Submit</Button>
       </form>
     </Modal>
   );

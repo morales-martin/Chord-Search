@@ -1,19 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { GetChord } from "../API.js";
 import { useForm } from "react-hook-form";
 import "./SearchForm.css";
 import Button from "../Components/UI/Button";
+import axios from "axios";
 
 const SearchForm = (props) => {
   const { register, handleSubmit } = useForm();
+  const [results, setResults] = useState([]);
+
+  useEffect(() => {
+    props.setResults(results)
+  },[results])
 
   const onSubmit = async (data) => {
     try {
-      props.setIsSubmitted(true);
-      props.setLoading(true);
       const chordEntries = await GetChord(data);
-      props.setResults(chordEntries);
-      props.setLoading(false);
+
+      setResults(chordEntries)
+
+      axios
+        .get(`http://localhost:5000/chords/search`, {
+          params: { chordName: data.chord },
+        })
+        .then((res) => {
+          setResults(previous => {
+            return [...previous, ...res.data]
+          })
+        })
+        .catch((err) => console.log(err));
+
     } catch (e) {
       console.log(e);
     }
