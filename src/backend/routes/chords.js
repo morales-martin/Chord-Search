@@ -8,7 +8,9 @@ router.route("/").get((req, res) => {
 });
 
 router.route("/search").get((req, res) => {
-  Chord.find({ "chordName": req.query.chordName })
+  let regx = new RegExp(`${req.query.chordName}`, "i");
+
+  Chord.find({ "chordName": regx })
     .then((chords) => res.json(chords))
     .catch((err) => res.status(400).json("Error: " + err));
 });
