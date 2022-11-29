@@ -1,29 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import Modal from "react-modal";
 import { useForm } from "react-hook-form";
 import Button from "./UI/Button";
 import "./AddChord.css";
 import axios from "axios";
+import Canvas from "./Canvas";
 
 const AddChord = (props) => {
   const { register, handleSubmit } = useForm();
+  const [error, setError] = useState("");
+  const [placementGrid, setPlacementGrid] = useState([]);
+
   Modal.setAppElement("body");
 
   const onSubmit = async (data) => {
     try {
+      let chordStrings = [];
+
+      for (let vertex of placementGrid) {
+        if (vertex.isVisible) {
+          chordStrings[vertex.stringPosition[0]] = vertex.stringPosition[1];
+        }
+      }
+
       let newChord = {
         chordName: data.chordName,
-        chordStrings: `${data.Chord1} ${data.Chord2} ${data.Chord3} ${data.Chord4} ${data.Chord5} ${data.Chord6}`,
+        chordStrings: chordStrings.join(" "),
       };
-
 
       axios
         .post("http://localhost:5000/chords/add", newChord)
-        .then((res) => console.log(res.data));
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((err) => setError(err.response.data));
 
-      axios.get('http://localhost:5000/chords').then(res => console.log(res.data))
-
-      props.addChordHandler();
+      // if (!error) props.addChordHandler();
     } catch {
       console.error("Failed to submit new chord");
     }
@@ -38,20 +50,23 @@ const AddChord = (props) => {
       isOpen={props.addChordSwitch}
     >
       <form className="add-chord-form" onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="chordName">Chord Name</label>
-        <input name="chordName" {...register("chordName")} />
-        <label htmlFor="Chord1">Chord1</label>
-        <input name="Chord1" {...register("Chord1")} />
-        <label htmlFor="Chord2">Chord2</label>
-        <input name="Chord2" {...register("Chord2")} />
-        <label htmlFor="Chord3">Chord3</label>
-        <input name="Chord3" {...register("Chord3")} />
-        <label htmlFor="Chord4">Chord4</label>
-        <input name="Chord4" {...register("Chord4")} />
-        <label htmlFor="Chord5">Chord5</label>
-        <input name="Chord5" {...register("Chord5")} />
-        <label htmlFor="Chord6">Chord6</label>
-        <input name="Chord6" {...register("Chord6")} />
+        {error && <div className="add-chord-error">{error}</div>}
+        <div className="add-chord-input">
+          <label htmlFor="chordName">Chord Name</label>
+          <input
+            name="chordName"
+            {...register("chordName")}
+            placeholder="F#"
+            required={true}
+          />
+        </div>
+        <Canvas
+          strings=""
+          enableDraw={true}
+          placementGrid={placementGrid}
+          setPlacementGrid={setPlacementGrid}
+          setError={setError}
+        />
         <Button>Submit</Button>
       </form>
     </Modal>

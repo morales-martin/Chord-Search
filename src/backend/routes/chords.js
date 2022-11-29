@@ -15,30 +15,46 @@ router.route("/search").get((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
-router.route("/add").post((req, res) => {
+router.route("/add").post(async (req, res) => {
   const chordName = req.body.chordName;
   const chordStrings = req.body.chordStrings;
+  let nameExists = false;
+  let stringsExist = false;
 
   const newChord = new Chord({ chordName, chordStrings });
 
-  console.log(Chord.exists({ chordName: chordName }))
+  await Chord.exists({ chordName: chordName }).then((result) => {
+    if (result) nameExists = true;
+  });
 
-  if (Chord.exists({ chordName: chordName })) {
-    res.status(400).json(`Chord ${chordName} already exists.`);
-  } else if (Chord.exists({ chordStrings: chordStrings })) {
-    Chord.find({ chordStrings: chordStrings })
-      .then(
-        (chords) =>
-          `String pattern ${chordStrings} is already matched to ${chords.join(
-            " "
-          )}`
-      )
-      .catch((err) => res.status(400).json("Error: " + err));
-  } else {
+  await Chord.exists({ chordStrings: chordStrings }).then((result) => {
+    if (result) stringsExist = true;
+  });
+
+  if (nameExists && stringsExist) {
+    // duplicate record
+    res
+      .status(400)
+      .json(
+        `Chord ${chordName} already exists and is matched to ${chordStrings}`
+      );
+  } else if (!stringsExist) {
+    // new chord
     newChord
       .save()
       .then(() => res.json("Chord added!"))
       .catch((err) => res.status(400).json("Error: " + err));
+  } else {
+    // duplicate string pattern
+    Chord.find({ chordStrings: chordStrings }).then((chords) =>
+      res
+        .status(400)
+        .json(
+          `String pattern ${chordStrings} is already matched to ${chords
+            .map((chord) => chord.chordName)
+            .join(" ")}`
+        )
+    );
   }
 });
 

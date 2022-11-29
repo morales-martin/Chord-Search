@@ -1,7 +1,9 @@
 .card {
     background: grey;
-    width: 20rem;
-    height: 20rem;
+    width: fit-content;
+    height: fit-content;
+    min-width: fit-content;
+    min-height: fit-content;
     margin: 0.5em;
     border-radius: 13px;
     overflow: hidden;

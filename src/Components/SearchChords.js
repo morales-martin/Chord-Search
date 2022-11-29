@@ -8,25 +8,26 @@ function SearchChords() {
   const [results, setResults] = useState([]);
   const [addChord, setAddChord] = useState(false);
 
-
-  const addSubmitHandler = e => {
+  const addSubmitHandler = (e) => {
     e.preventDefault();
-  }
+  };
 
   const addChordHandler = () => {
     let addSwitch = addChord ? false : true;
     setAddChord(addSwitch);
-  }
+  };
 
   return (
     <div className="search-chords__container">
+      {addChord && (
+        <AddChord addChordSwitch={addChord} addChordHandler={addChordHandler} />
+      )}
       <div className="search-chords__searchbar">
         <SearchForm
           setResults={setResults}
           handleAddSubmit={addSubmitHandler}
           setAddChord={addChordHandler}
         />
-        {addChord && <AddChord addChordSwitch={addChord} addChordHandler={addChordHandler}/>}
       </div>
       {results && <ResultGrid results={results} />}
     </div>

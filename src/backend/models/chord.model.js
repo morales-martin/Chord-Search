@@ -7,7 +7,6 @@ const chordSchema = new Schema(
     chordName: {
       type: String,
       required: true,
-      unique: true,
       trim: true,
     },
     chordStrings: {
