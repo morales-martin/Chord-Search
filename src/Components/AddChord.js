@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import { useForm } from "react-hook-form";
 import Button from "./UI/Button";
@@ -15,11 +15,12 @@ const AddChord = (props) => {
 
   const onSubmit = async (data) => {
     try {
-      let chordStrings = [];
+      let chordStrings = new Array(6).fill(0);
 
       for (let vertex of placementGrid) {
         if (vertex.isVisible) {
-          chordStrings[vertex.stringPosition[0]] = vertex.stringPosition[1];
+          chordStrings[vertex.stringPosition[0]] =
+            vertex.symbol || vertex.stringPosition[1];
         }
       }
 
@@ -50,7 +51,6 @@ const AddChord = (props) => {
       isOpen={props.addChordSwitch}
     >
       <form className="add-chord-form" onSubmit={handleSubmit(onSubmit)}>
-        {error && <div className="add-chord-error">{error}</div>}
         <div className="add-chord-input">
           <label htmlFor="chordName">Chord Name</label>
           <input
@@ -60,6 +60,7 @@ const AddChord = (props) => {
             required={true}
           />
         </div>
+        {error && <div className="add-chord-error">{error}</div>}
         <Canvas
           strings=""
           enableDraw={true}

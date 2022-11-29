@@ -50,7 +50,7 @@ router.route("/add").post(async (req, res) => {
       res
         .status(400)
         .json(
-          `String pattern ${chordStrings} is already matched to ${chords
+          `This string pattern is already matched to ${chords
             .map((chord) => chord.chordName)
             .join(" ")}`
         )

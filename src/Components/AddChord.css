@@ -10,18 +10,22 @@
 
 .add_chord__modal {
   outline: none;
-  padding: 25px;
-  overflow: auto;
+  /* padding: 25px; */
   border-radius: 2rem;
   background: grey;
   display: flex;
   margin: auto;
+  height: 50%;
+  width: 35%;
+  overflow: hidden;
+  min-width: fit-content;
 }
 
 .add-chord-form {
   margin: auto;
   display: flex;
   flex-direction: column;
+
 }
 
 .add-chord-form input {
@@ -38,12 +42,12 @@
 .add-chord-error {
   color: red;
   margin-left: 1rem;
-  width: 80%;
+  font-size: small;
 }
 
 .add-chord-input {
   display: flex;
   flex-direction: row;
-  margin: 1rem;
   padding: 0.1rem;
+  margin: auto;
 }

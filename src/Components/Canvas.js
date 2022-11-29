@@ -45,6 +45,7 @@ function Canvas(props) {
           ],
           stringPosition: [i, j],
           isVisible: false,
+          symbol: j === 0 ? "X" : null,
         });
       }
     }
@@ -136,6 +137,9 @@ function Canvas(props) {
         vertex.coords[0] === minVertex[0] &&
         vertex.coords[1] === minVertex[1]
       ) {
+        if (vertex.symbol === "X" || vertex.symbol === "0") {
+          vertex.symbol = vertex.symbol === "X" ? "0" : "X";
+        }
         vertex.isVisible = true;
       } else if (vertex.coords[0] === minVertex[0]) {
         vertex.isVisible = false;
@@ -143,13 +147,9 @@ function Canvas(props) {
 
       if (vertex.isVisible === true) {
         context.beginPath();
-        if(vertex.stringPosition[1] === 0) {
-          context.fillText(
-            "X",
-            vertex.coords[0],
-            fretLine
-          );
-        }else{
+        if (vertex.stringPosition[1] === 0) {
+          context.fillText(vertex.symbol, vertex.coords[0], fretLine);
+        } else {
           context.arc(vertex.coords[0], vertex.coords[1], 10, 0, 2 * Math.PI);
         }
         context.fill();
@@ -158,7 +158,7 @@ function Canvas(props) {
     }
 
     props.setPlacementGrid([...currPlacementGrid]);
-    props.setError("")
+    props.setError("");
   };
 
   return (
