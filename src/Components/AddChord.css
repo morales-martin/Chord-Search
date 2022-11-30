@@ -12,7 +12,8 @@
   outline: none;
   /* padding: 25px; */
   border-radius: 2rem;
-  background: grey;
+  background: var(--main);
+  color: var(--secondary);
   display: flex;
   margin: auto;
   height: 50%;
@@ -29,14 +30,17 @@
 }
 
 .add-chord-form input {
-  background: white;
+  background: var(--secondary);
   border-radius: 15px;
+  padding: 1rem;
+  margin: auto;
   border: none;
   outline: none;
+  color: var(--main)
 }
 
 .add-chord-form label {
-  margin: 0 1rem;
+  margin: auto 1rem;
 }
 
 .add-chord-error {

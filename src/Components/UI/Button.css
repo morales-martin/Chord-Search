@@ -1,17 +1,18 @@
-.btn-svg {
-    background: transparent;
+.submit {
+    color: var(--main);
+    background-color: var(--secondary);
+    border-radius: 5rem;
+    padding: 3%;
+    width: 40%;
+    margin: auto;
+}
+
+.button-template {
+    text-decoration: none;
     border: none;
     outline: none;
 }
 
-.btn-svg:hover {
+.button-template:hover {
     cursor: pointer;
-}
-
-.btn-svg path {
-    fill: white;
-}
-
-.btn-svg svg {
-    width: 2rem;
 }

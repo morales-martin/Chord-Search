@@ -1,22 +1,29 @@
 .search-form {
   min-width: 40%;
   margin: auto;
-  position: relative;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  flex: 0.25;
 }
 
-.search-form input {
-  background: grey;
+.search-tools input {
+  background: var(--secondary);
   border-radius: 15px;
   border: none;
   outline: none;
   font-size: xx-large;
-  color: white;
-  margin: 1.3rem;
+  color: var(--main);
+  margin: auto;
   padding: 0.5rem;
+  width: 100%;
+  min-width: 10rem;
+}
+
+.search-tools {
+  margin: auto;
+  display: flex;
+  min-width: fit-content;
+  width: 20rem;
 }
 
 .search-form input:hover {
@@ -24,9 +31,24 @@
 }
 
 .search-form__searchbtn {
-  margin-left: -4rem;
+  margin-left: -3rem;
+  fill: var(--main)
 }
 
 .add-chord__btn {
   margin-left: 2rem;
+  fill: var(--secondary)
+}
+
+.search-form label {
+  margin: auto;
+}
+
+.search-tools Button {
+  background: transparent;
+  width: 2rem;
+}
+
+.search-tools Button:hover {
+  cursor: pointer;
 }

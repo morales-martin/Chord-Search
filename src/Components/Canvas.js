@@ -18,9 +18,14 @@ function Canvas(props) {
     }
 
     if (context) {
+      let strokeColor = props.enableDraw ? "--secondary" : "--main"
+      let mainColor = getComputedStyle(canvasRef.current).getPropertyValue(strokeColor) || 'black';
+  
+
       context.font = "20px Verdana";
       context.textAlign = "center";
-      context.fillStyle = "black";
+      context.fillStyle = mainColor
+      context.strokeStyle = mainColor;
 
       drawGrid();
       if (props.enableDraw) {
@@ -29,7 +34,7 @@ function Canvas(props) {
         drawStringPlacements();
       }
     }
-  }, [context]);
+  }, [context, canvasRef]);
 
   const populateFingerPlacementCoordinates = () => {
     let currGrid = [];
@@ -111,8 +116,8 @@ function Canvas(props) {
   };
 
   const onMouseClick = (e) => {
-    const mouseX = e.pageX - e.target.offsetLeft;
-    const mouseY = e.pageY - e.target.offsetTop;
+    const mouseX = e.clientX - e.target.offsetLeft;
+    const mouseY = e.clientY - e.target.offsetTop;
 
     let minDistance = Infinity;
     let minVertex;

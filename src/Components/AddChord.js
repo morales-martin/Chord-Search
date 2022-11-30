@@ -16,6 +16,7 @@ const AddChord = (props) => {
   const onSubmit = async (data) => {
     try {
       let chordStrings = new Array(6).fill(0);
+      let error;
 
       for (let vertex of placementGrid) {
         if (vertex.isVisible) {
@@ -29,14 +30,18 @@ const AddChord = (props) => {
         chordStrings: chordStrings.join(" "),
       };
 
-      axios
+      await axios
         .post("http://localhost:5000/chords/add", newChord)
         .then((res) => {
           console.log(res.data);
         })
-        .catch((err) => setError(err.response.data));
+        .catch((err) => (error = err.response.data));
 
-      // if (!error) props.addChordHandler();
+      if (!error) {
+        props.addChordHandler();
+      } else {
+        setError(error);
+      }
     } catch {
       console.error("Failed to submit new chord");
     }
@@ -68,7 +73,7 @@ const AddChord = (props) => {
           setPlacementGrid={setPlacementGrid}
           setError={setError}
         />
-        <Button>Submit</Button>
+        <Button className="submit">Submit</Button>
       </form>
     </Modal>
   );

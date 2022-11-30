@@ -36,7 +36,7 @@ router.route("/add").post(async (req, res) => {
     res
       .status(400)
       .json(
-        `Chord ${chordName} already exists and is matched to ${chordStrings}`
+        `Chord ${chordName} already exists with this string pattern.`
       );
   } else if (!stringsExist) {
     // new chord

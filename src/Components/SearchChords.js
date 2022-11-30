@@ -22,7 +22,7 @@ function SearchChords() {
       {addChord && (
         <AddChord addChordSwitch={addChord} addChordHandler={addChordHandler} />
       )}
-      <div className="search-chords__searchbar">
+      <div className={`search-chords__searchbar`}>
         <SearchForm
           setResults={setResults}
           handleAddSubmit={addSubmitHandler}

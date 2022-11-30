@@ -1,5 +1,5 @@
 .card {
-    background: grey;
+    background: var(--secondary);
     width: fit-content;
     height: fit-content;
     min-width: fit-content;
@@ -8,4 +8,5 @@
     border-radius: 13px;
     overflow: hidden;
     text-align: center;
+    color: var(--main)
 }
