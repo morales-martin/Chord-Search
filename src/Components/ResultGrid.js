@@ -11,6 +11,7 @@ const ResultGrid = (props) => {
             key={chord.voicingID || chord._id}
             chordName={chord.chordName}
             strings={chord.strings || chord.chordStrings}
+            darkMode={props.darkMode}
           ></Card>
         );
       })}

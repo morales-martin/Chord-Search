@@ -8,5 +8,12 @@
   display: flex;
   flex-direction: row;
   margin: auto;
-  width: 80%;
+  /* width: 80%; */
+}
+
+.btn-darkmode {
+  width: 5rem;
+  fill: var(--secondary);
+  background-color: transparent;
+  margin-top:5rem;
 }

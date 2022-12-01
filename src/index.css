@@ -17,18 +17,3 @@ html {
 body {
   background-color: var(--main);
 }
-
-input::-webkit-input-placeholder {
-  color: red !important;
-}
-  input:-moz-placeholder {
-  /* Firefox 18- */
-  color: red !important;
-}
-  input::-moz-placeholder {
-  /* Firefox 19+ */
-  color: red !important;
-}
-  input:-ms-input-placeholder {
-  color: red !important;
-}

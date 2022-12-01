@@ -7,28 +7,21 @@ import axios from "axios";
 
 const SearchForm = (props) => {
   const { register, handleSubmit } = useForm();
-  const [results, setResults] = useState([]);
-
-  useEffect(() => {
-    props.setResults(results);
-  }, [results]);
 
   const onSubmit = async (data) => {
     try {
-      const chordEntries = await GetChord(data);
+      let chordEntries = await GetChord(data);
 
-      setResults(chordEntries);
-
-      axios
+      await axios
         .get(`http://localhost:5000/chords/search`, {
           params: { chordName: data.chord },
         })
         .then((res) => {
-          setResults((previous) => {
-            return [...previous, ...res.data];
-          });
+          chordEntries = [...chordEntries, ...res.data];
         })
         .catch((err) => console.log(err));
+
+      props.setResults(chordEntries);
     } catch (e) {
       console.log(e);
     }
@@ -42,7 +35,7 @@ const SearchForm = (props) => {
         <h1>How do I play...</h1>
       </label>
       <div className="search-tools">
-        <input name="chord" {...register("chord")} required={true}/>
+        <input name="chord" {...register("chord")} required={true} />
         <Button className="search-form__searchbtn">
           <svg
             focusable="false"

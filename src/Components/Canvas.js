@@ -18,14 +18,15 @@ function Canvas(props) {
     }
 
     if (context) {
-      let strokeColor = props.enableDraw ? "--secondary" : "--main"
-      let mainColor = getComputedStyle(canvasRef.current).getPropertyValue(strokeColor) || 'black';
-  
+      let fillColor = props.darkMode ? "rgba(78, 78, 78)" : "white";
+
+      if (props.enableDraw)
+        fillColor = props.darkMode ? "white" : "rgba(78, 78, 78)";
 
       context.font = "20px Verdana";
       context.textAlign = "center";
-      context.fillStyle = mainColor
-      context.strokeStyle = mainColor;
+      context.fillStyle = fillColor;
+      context.strokeStyle = fillColor;
 
       drawGrid();
       if (props.enableDraw) {
@@ -34,7 +35,7 @@ function Canvas(props) {
         drawStringPlacements();
       }
     }
-  }, [context, canvasRef]);
+  }, [context, canvasRef, props.darkMode]);
 
   const populateFingerPlacementCoordinates = () => {
     let currGrid = [];

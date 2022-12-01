@@ -11,7 +11,7 @@ function Card(props) {
   return (
     <div className={classes}>
         <h1>{chordName.replace(/,/g,'')}</h1>
-        <Canvas strings={props.strings} enableDraw={false}></Canvas>
+        <Canvas strings={props.strings} enableDraw={false} darkMode={props.darkMode}></Canvas>
     </div>
   )
 }

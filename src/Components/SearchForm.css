@@ -1,5 +1,5 @@
 .search-form {
-  min-width: 40%;
+  /* min-width: 40%; */
   margin: auto;
   display: flex;
   flex-direction: row;
@@ -23,7 +23,7 @@
   margin: auto;
   display: flex;
   min-width: fit-content;
-  width: 20rem;
+  width: 80%;
 }
 
 .search-form input:hover {
@@ -36,7 +36,7 @@
 }
 
 .add-chord__btn {
-  margin-left: 2rem;
+  margin: 0 1.2rem;
   fill: var(--secondary)
 }
 
@@ -47,6 +47,10 @@
 .search-tools Button {
   background: transparent;
   width: 2rem;
+}
+
+.search-tools svg {
+  width: 1.3rem;
 }
 
 .search-tools Button:hover {

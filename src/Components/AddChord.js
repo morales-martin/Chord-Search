@@ -54,6 +54,7 @@ const AddChord = (props) => {
       onRequestClose={props.addChordHandler}
       contentLabel="Tiny nomadic modal popover"
       isOpen={props.addChordSwitch}
+      preventScroll={true}
     >
       <form className="add-chord-form" onSubmit={handleSubmit(onSubmit)}>
         <div className="add-chord-input">
@@ -72,6 +73,7 @@ const AddChord = (props) => {
           placementGrid={placementGrid}
           setPlacementGrid={setPlacementGrid}
           setError={setError}
+          darkMode={props.darkMode}
         />
         <Button className="submit">Submit</Button>
       </form>
