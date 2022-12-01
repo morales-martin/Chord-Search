@@ -35,19 +35,36 @@ function SearchChords() {
   return (
     <div className="search-chords__container">
       {addChord && (
-        <AddChord addChordSwitch={addChord} addChordHandler={addChordHandler} darkMode={darkMode} />
+        <AddChord
+          addChordSwitch={addChord}
+          addChordHandler={addChordHandler}
+          darkMode={darkMode}
+        />
       )}
       <div className={`search-chords__searchbar`}>
-        <Button
-          className="btn-darkmode"
-          onClick={() => {
-            setDarkMode(!darkMode);
-          }}
-        >
-          <svg focusable="false" viewBox="0 0 24 24">
-            <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"></path>
-          </svg>
-        </Button>
+        <div className="modal-buttons">
+          <Button
+            className="btn-darkmode"
+            onClick={() => {
+              setDarkMode(!darkMode);
+            }}
+          >
+            <svg focusable="false" viewBox="0 0 24 24">
+              <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"></path>
+            </svg>
+          </Button>
+          <Button className="add-chord__btn" onClick={addChordHandler}>
+            <svg
+              focusable="false"
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              data-testid="AddIcon"
+            >
+              <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path>
+            </svg>
+          </Button>
+        </div>
+
         <SearchForm
           setResults={setResults}
           handleAddSubmit={addSubmitHandler}
@@ -60,5 +77,3 @@ function SearchChords() {
 }
 
 export default SearchChords;
-
-//document.documentElement.style.setProperty('--base',this.state.color);

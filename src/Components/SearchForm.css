@@ -1,5 +1,4 @@
 .search-form {
-  /* min-width: 40%; */
   margin: auto;
   display: flex;
   flex-direction: row;
@@ -13,17 +12,13 @@
   outline: none;
   font-size: xx-large;
   color: var(--main);
-  margin: auto;
   padding: 0.5rem;
-  width: 100%;
-  min-width: 10rem;
+  margin: auto;
 }
 
 .search-tools {
   margin: auto;
   display: flex;
-  min-width: fit-content;
-  width: 80%;
 }
 
 .search-form input:hover {
@@ -31,28 +26,27 @@
 }
 
 .search-form__searchbtn {
-  margin-left: -3rem;
-  fill: var(--main)
-}
-
-.add-chord__btn {
-  margin: 0 1.2rem;
-  fill: var(--secondary)
+  position: relative;
+  right:10%;
+  fill: var(--main);
+  background-color: red;
 }
 
 .search-form label {
   margin: auto;
+  display: flex;
+  flex-wrap: wrap;
 }
 
-.search-tools Button {
+.search-form Button {
   background: transparent;
   width: 2rem;
 }
 
-.search-tools svg {
+.search-form svg {
   width: 1.3rem;
 }
 
-.search-tools Button:hover {
+.search-form Button:hover {
   cursor: pointer;
 }
