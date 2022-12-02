@@ -9,6 +9,19 @@ function SearchChords() {
   const [results, setResults] = useState([]);
   const [addChord, setAddChord] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
+  const [windowOffset, setWindowOffset] = useState(0)
+
+  useEffect(() => {
+    if (addChord) {
+      let currOffset = window.scrollY
+      setWindowOffset(currOffset)
+      document.body.style.top = `-${currOffset}px`;
+      document.body.style.position = 'fixed';
+    } else {
+      document.body.style.position = 'static';
+      window.scrollTo(0,windowOffset)
+    }
+  }, [addChord]);
 
   useEffect(() => {
     if (darkMode) {
@@ -41,7 +54,7 @@ function SearchChords() {
           darkMode={darkMode}
         />
       )}
-      <div className={`search-chords__searchbar`}>
+      <div className={`search-chords__searchbar ${results.length ? "" : 'center'}`}>
         <div className="modal-buttons">
           <Button
             className="btn-darkmode"
@@ -64,7 +77,6 @@ function SearchChords() {
             </svg>
           </Button>
         </div>
-
         <SearchForm
           setResults={setResults}
           handleAddSubmit={addSubmitHandler}

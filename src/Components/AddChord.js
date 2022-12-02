@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Modal from "react-modal";
 import { useForm } from "react-hook-form";
 import Button from "./UI/Button";
 import "./AddChord.css";
-import axios from "axios";
 import Canvas from "./Canvas";
+import { API } from "aws-amplify";
 
 const AddChord = (props) => {
   const { register, handleSubmit } = useForm();
@@ -30,12 +30,13 @@ const AddChord = (props) => {
         chordStrings: chordStrings.join(" "),
       };
 
-      await axios
-        .post("http://localhost:5000/chords/add", newChord)
+      await API.post("chordSearchApi", "/chords/add", { body: newChord })
         .then((res) => {
-          console.log(res.data);
+          console.log(res);
         })
-        .catch((err) => (error = err.response.data));
+        .catch((err) => {
+          error = err.response.data;
+        });
 
       if (!error) {
         props.addChordHandler();

@@ -8,8 +8,6 @@
 .search-chords__searchbar {
   display: flex;
   flex-direction: row;
-  margin: auto;
-  height: 100%;
 }
 
 .modal-buttons Button {
@@ -31,4 +29,8 @@
   z-index: 100%;
   background-color: var(--secondary);
   border-radius: 5% 5% 5% 0;
+}
+
+.center {
+  margin: auto;
 }

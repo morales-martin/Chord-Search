@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { GetChord } from "../API.js";
 import { useForm } from "react-hook-form";
+import { API } from "aws-amplify";
 import "./SearchForm.css";
 import Button from "../Components/UI/Button";
-import axios from "axios";
 
 const SearchForm = (props) => {
   const { register, handleSubmit } = useForm();
@@ -12,14 +12,13 @@ const SearchForm = (props) => {
     try {
       let chordEntries = await GetChord(data);
 
-      await axios
-        .get(`http://localhost:5000/chords/search`, {
-          params: { chordName: data.chord },
-        })
+      await API.get("chordSearchApi", "/chords/search", {
+        queryStringParameters: { chordName: data.chord },
+      })
         .then((res) => {
-          chordEntries = [...chordEntries, ...res.data];
+          chordEntries = [...chordEntries, ...res];
         })
-        .catch((err) => console.log(err));
+        .catch((err) => console.log(err.response.data));
 
       props.setResults(chordEntries);
     } catch (e) {

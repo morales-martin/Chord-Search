@@ -1,9 +1,8 @@
 .grid-container {
-  flex: 1;
   display: flex;
   flex-direction: row;
-  justify-content: center;
   flex-wrap: wrap;
-  margin: 0 auto;
+  margin: 2rem auto;
   max-width: 75%;
+  justify-content: space-evenly;
 }
